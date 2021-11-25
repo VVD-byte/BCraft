@@ -1,5 +1,9 @@
 # BCraft
 
+## Развертка
+```docker-compose build```  
+```docker-compose up```
+
 ## Документация api
 ```http://0.0.0.0:8000/api/docs/```
 
