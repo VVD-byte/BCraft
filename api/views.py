@@ -28,14 +28,17 @@ class ListStatisticView(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         try:
-            return response.Response(
-                self.serializer_class(
-                    self.queryset.filter(
-                        Date__gte=request.query_params.get('from'),
-                        Date__lt=request.query_params.get('to')
-                    ), many=True
-                ).data
+            response_data = self.serializer_class(
+                data=list(self.queryset.filter(
+                    Date__gte=request.query_params.get('from'),
+                    Date__lt=request.query_params.get('to')
+                ).order_by('Date').values()), many=True
             )
+            if response_data.is_valid():
+                return response.Response(
+                    response_data.data
+                )
+            return response.Response(response_data.errors)
         except Exception as e:
             return super().get(request, *args, **kwargs)
 

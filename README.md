@@ -1,5 +1,9 @@
 # BCraft
 
+## Command
+```python manage.py generate_data``` - рандомно заполняет бд  
+```-c {int}``` - параметр указывающий на количество создаваемых записей  
+
 ## Развертка
 ```docker-compose build```  
 ```docker-compose up```
