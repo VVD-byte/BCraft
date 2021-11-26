@@ -14,12 +14,11 @@ class Command(BaseCommand):
         for i in range(count):
             date = datetime.datetime.today() - datetime.timedelta(days=random.randint(0, 365))
             obj = models.StatisticsModel(
+                Date=date.strftime('%Y-%m-%d'),
                 Views=random.randint(1, 10000),
                 Cost=random.uniform(1, 100),
             )
             obj.Clicks = random.randint(1, obj.Views)
-            obj.save()
-            obj.Date = date.strftime('%Y-%m-%d')
             obj.save()
         print(f'Созданы {count} случайных записей')
 

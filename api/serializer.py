@@ -13,15 +13,9 @@ class CreateStatisticSerializer(serializers.ModelSerializer):
 class ListStatisticSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     Date = serializers.DateField()
-    cpc = serializers.SerializerMethodField()
-    cpm = serializers.SerializerMethodField()
+    cpc = serializers.ReadOnlyField()
+    cpm = serializers.ReadOnlyField()
 
     class Meta:
         model = models.StatisticsModel
-        fields = ('id', 'Date', 'Views', 'Clicks', 'Cost', 'cpc', 'cpm')
-
-    def get_cpc(self, obj):
-        return round(obj.get('Cost')/obj.get('Clicks'), 2)
-
-    def get_cpm(self, obj):
-        return round(obj.get('Cost')/obj.get('Views') * 1000, 2)
+        fields = '__all__'
